@@ -54,7 +54,6 @@ func TestFactorial(t *testing.T) {
 	}
 }
 
-
 func TestCoinChange(t *testing.T) {
 	tests := []struct {
 		coins    []int
@@ -72,6 +71,27 @@ func TestCoinChange(t *testing.T) {
 		result := coinChange(test.coins, test.target)
 		if result != test.expected {
 			t.Errorf("coinChange(%v, %d) returned %d, expected %d", test.coins, test.target, result, test.expected)
+		}
+	}
+}
+
+func TestLCS(t *testing.T) {
+	tests := []struct {
+		X        string
+		Y        string
+		expected string
+	}{
+		{"ABCDGH", "AEDFHR", "ADH"},
+		{"AGGTAB", "GXTXAYB", "GTAB"},
+		{"ABCDEF", "XYZ", ""},
+		{"", "XYZ", ""},
+		{"", "", ""},
+	}
+
+	for _, test := range tests {
+		result := LCS(test.X, test.Y)
+		if result != test.expected {
+			t.Errorf("LCS(%s, %s) returned %s, expected %s", test.X, test.Y, result, test.expected)
 		}
 	}
 }
