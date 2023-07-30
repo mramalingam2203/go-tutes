@@ -9,33 +9,33 @@ import (
 
 /*
 
-	1. Fibonacci Series: Implement the Fibonacci series using dynamic programming to efficiently calculate the nth Fibonacci number.
+1. Fibonacci Series: Implement the Fibonacci series using dynamic programming to efficiently calculate the nth Fibonacci number.
 
-	2. Factorial: Calculate the factorial of a given number using dynamic programming.
+2. Factorial: Calculate the factorial of a given number using dynamic programming.
 
-    3. Coin Change Problem: Given a set of coin denominations and a target amount, find the minimum number of coins needed to make up that amount.
+3. Coin Change Problem: Given a set of coin denominations and a target amount, find the minimum number of coins needed to make up that amount.
 
-    4. Longest Common Subsequence (LCS): Given two strings, find the length of the longest common subsequence using dynamic programming.
+4. Longest Common Subsequence (LCS): Given two strings, find the length of the longest common subsequence using dynamic programming.
 
-    5. Knapsack Problem: Given a set of items with weights and values, and a maximum weight capacity for a knapsack, determine the maximum value that can be obtained by including items in the knapsack.
+5. Knapsack Problem: Given a set of items with weights and values, and a maximum weight capacity for a knapsack, determine the maximum value that can be obtained by including items in the knapsack.
 
-    6, Maximum Sum Subarray: Given an array of integers, find the contiguous subarray with the largest sum using dynamic programming.
+6, Maximum Sum Subarray: Given an array of integers, find the contiguous subarray with the largest sum using dynamic programming.
 
-    7. Rod Cutting Problem: Given a rod of length n and a list of prices for different rod lengths, find the maximum revenue that can be obtained by cutting and selling the rod.
+7. Rod Cutting Problem: Given a rod of length n and a list of prices for different rod lengths, find the maximum revenue that can be obtained by cutting and selling the rod.
 
-    8. Palindrome Partitioning: Given a string, partition it into substrings such that each substring is a palindrome, and the number of partitions is minimized.
+8. Palindrome Partitioning: Given a string, partition it into substrings such that each substring is a palindrome, and the number of partitions is minimized.
 
-    9. Unique Paths: Given a grid with m rows and n columns, find the number of unique paths from the top-left corner to the bottom-right corner. You can only move right or down at any point.
+9. Unique Paths: Given a grid with m rows and n columns, find the number of unique paths from the top-left corner to the bottom-right corner. You can only move right or down at any point.
 
-    10. Minimum Path Sum: Given a grid with non-negative numbers, find the minimum path sum from the top-left corner to the bottom-right corner. You can only move right or down at any point.
+10. Minimum Path Sum: Given a grid with non-negative numbers, find the minimum path sum from the top-left corner to the bottom-right corner. You can only move right or down at any point.
 
-    11. Longest Increasing Subsequence (LIS): Given an array of integers, find the length of the longest increasing subsequence using dynamic programming.
+11. Longest Increasing Subsequence (LIS): Given an array of integers, find the length of the longest increasing subsequence using dynamic programming.
 
-    12. Maximum Product Subarray: Given an array of integers, find the contiguous subarray with the largest product using dynamic programming.
+12. Maximum Product Subarray: Given an array of integers, find the contiguous subarray with the largest product using dynamic programming.
 
-    13. Coin Change 2: Given a set of coin denominations and a target amount, find the number of combinations that make up that amount.
+13. Coin Change 2: Given a set of coin denominations and a target amount, find the number of combinations that make up that amount.
 
-    14. Word Break: Given a non-empty string and a dictionary of words, determine if the string can be segmented into a space-separated sequence of dictionary words.
+14. Word Break: Given a non-empty string and a dictionary of words, determine if the string can be segmented into a space-separated sequence of dictionary words.
 
 */
 
@@ -47,7 +47,7 @@ func main() {
 	coins[0] = 2
 	// coins[1] = 2
 	// coins[2] = 5
-	 target := 3
+	target := 3
 
 	fmt.Println(coinChange(coins, target))
 
@@ -105,6 +105,8 @@ func min(a, b int) int {
 
 }
 
+// Coin Change Problem: Given a set of coin denominations and a target amount, find the minimum number of coins needed to make up that amount.
+
 func coinChange(coins []int, target int) int {
 	fmt.Println(coins, target)
 	dp := make([]int, target+1)
@@ -130,4 +132,25 @@ func coinChange(coins []int, target int) int {
 	}
 
 	return dp[target]
+}
+
+// 4. Longest Common Subsequence (LCS): Given two strings, find the length of the longest common subsequence using dynamic programming.
+func lcs(X, Y string) {
+	m := len(X)
+	n := len(Y)
+
+	// create a 2d slice of strings
+	dp := make([][]int, m)
+
+	for i := 0; i < m; i++ {
+		dp[i] = make([]int, n)
+	}
+	// Initialize the first row and first column of the dp array to 0.
+	for i := range m {
+		dp[i][0] = 0
+	}
+
+	for j := range n {
+		dp[0][j] = 0
+	}
 }
