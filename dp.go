@@ -57,7 +57,7 @@ func main() {
 	/*	Longest Common Subsequence(LCS) function call */
 	str1 := "abcabcdcd"
 	str2 := "abcdddadc"
-	lcs(str1, str2)
+	LCS(str1, str2)
 
 }
 
@@ -150,7 +150,7 @@ func coinChange(coins []int, target int) int {
 }
 
 // 4. Longest Common Subsequence (LCS): Given two strings, find the length of the longest common subsequence using dynamic programming.
-func lcs(X, Y string) string {
+func LCS(X, Y string) string {
 	m := len(X)
 	n := len(Y)
 
@@ -198,7 +198,17 @@ func lcs(X, Y string) string {
 			j--
 		}
 	}
+	return reverseString(lcs)
 
-	return lcs
+}
 
+func reverseString(s string) string {
+	runes := []rune(s) // Convert the string to a slice of runes
+
+	// Reverse the slice of runes
+	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
+		runes[i], runes[j] = runes[j], runes[i]
+	}
+
+	return string(runes) // Convert the reversed slice back to a string
 }
