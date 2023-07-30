@@ -6,9 +6,49 @@ import (
 	"fmt"
 )
 
+/*
+
+	1. Fibonacci Series: Implement the Fibonacci series using dynamic programming to efficiently calculate the nth Fibonacci number.
+
+	2. Factorial: Calculate the factorial of a given number using dynamic programming.
+
+    3. Coin Change Problem: Given a set of coin denominations and a target amount, find the minimum number of coins needed to make up that amount.
+
+    4. Longest Common Subsequence (LCS): Given two strings, find the length of the longest common subsequence using dynamic programming.
+
+    5. Knapsack Problem: Given a set of items with weights and values, and a maximum weight capacity for a knapsack, determine the maximum value that can be obtained by including items in the knapsack.
+
+    6, Maximum Sum Subarray: Given an array of integers, find the contiguous subarray with the largest sum using dynamic programming.
+
+    7. Rod Cutting Problem: Given a rod of length n and a list of prices for different rod lengths, find the maximum revenue that can be obtained by cutting and selling the rod.
+
+    8. Palindrome Partitioning: Given a string, partition it into substrings such that each substring is a palindrome, and the number of partitions is minimized.
+
+    9. Unique Paths: Given a grid with m rows and n columns, find the number of unique paths from the top-left corner to the bottom-right corner. You can only move right or down at any point.
+
+    10. Minimum Path Sum: Given a grid with non-negative numbers, find the minimum path sum from the top-left corner to the bottom-right corner. You can only move right or down at any point.
+
+    11. Longest Increasing Subsequence (LIS): Given an array of integers, find the length of the longest increasing subsequence using dynamic programming.
+
+    12. Maximum Product Subarray: Given an array of integers, find the contiguous subarray with the largest product using dynamic programming.
+
+    13. Coin Change 2: Given a set of coin denominations and a target amount, find the number of combinations that make up that amount.
+
+    14. Word Break: Given a non-empty string and a dictionary of words, determine if the string can be segmented into a space-separated sequence of dictionary words.
+
+*/
+
 func main() {
 	fmt.Println(fibonacci(10))
 	fmt.Println(factorial(10))
+
+	coins := make([]int, 3)
+	coins[0] = 1
+	coins[1] = 2
+	coins[2] = 5
+	target := 11
+
+	coinChange(coins, target)
 
 }
 
@@ -51,4 +91,30 @@ func factorial(n int) int {
 	}
 
 	return fac[n]
+}
+
+// Coin Change Problem: Given a set of coin denominations and a target amount, find the minimum number of coins needed to make up that amount
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+
+	return a
+
+}
+
+func coinChange(coins []int, target int) {
+
+	dp := make([]int, target+1)
+	dp[0] = 0
+
+	for i := 1; i <= target; i++ {
+		for coin := range coins {
+			if i-coin >= 0 {
+				dp[i] = min(dp[i], dp[i-coin]+1)
+			}
+		}
+	}
+
 }
