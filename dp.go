@@ -150,27 +150,27 @@ func coinChange(coins []int, target int) int {
 }
 
 // 4. Longest Common Subsequence (LCS): Given two strings, find the length of the longest common subsequence using dynamic programming.
-func lcs(X, Y string) {
+func lcs(X, Y string) string {
 	m := len(X)
 	n := len(Y)
 
 	// create a 2d slice of strings
-	dp := make([][]int, m)
+	dp := make([][]int, m+1)
 
-	for i := 0; i < m; i++ {
-		dp[i] = make([]int, n)
+	for i := 0; i <= m; i++ {
+		dp[i] = make([]int, n+1)
 	}
 	// Initialize the first row and first column of the dp array to 0.
-	for i := 0; i < m; i++ {
+	for i := 0; i <= m; i++ {
 		dp[i][0] = 0
 	}
 
-	for i := 0; i < n; i++ {
+	for i := 0; i <= n; i++ {
 		dp[0][i] = 0
 	}
 
-	for i := 0; i < m; i++ {
-		for j := 0; j < n; j++ {
+	for i := 1; i <= m; i++ {
+		for j := 1; j <= n; j++ {
 			if X[i-1] == Y[j-1] {
 				dp[i][j] = dp[i-1][j-1] + 1
 			} else {
@@ -179,5 +179,26 @@ func lcs(X, Y string) {
 		}
 	}
 
-	fmt.Println(dp)
+	//lcs_length := dp[m][n]
+
+	lcs := ""
+	i := m
+	j := n
+
+	for i > 0 && j > 0 {
+
+		if X[i-1] == Y[j-1] {
+			lcs += string(X[i-1])
+			i--
+			j--
+
+		} else if dp[i-1][j] > dp[i][j-1] {
+			i--
+		} else {
+			j--
+		}
+	}
+
+	return lcs
+
 }
