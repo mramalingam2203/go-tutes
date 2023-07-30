@@ -4,6 +4,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 )
 
 /*
@@ -42,13 +43,13 @@ func main() {
 	fmt.Println(fibonacci(10))
 	fmt.Println(factorial(10))
 
-	coins := make([]int, 3)
-	coins[0] = 1
-	coins[1] = 2
-	coins[2] = 5
-	target := 11
+	coins := make([]int, 1)
+	coins[0] = 2
+	// coins[1] = 2
+	// coins[2] = 5
+	 target := 3
 
-	coinChange(coins, target)
+	fmt.Println(coinChange(coins, target))
 
 }
 
@@ -100,21 +101,33 @@ func min(a, b int) int {
 		return a
 	}
 
-	return a
+	return b
 
 }
 
-func coinChange(coins []int, target int) {
-
+func coinChange(coins []int, target int) int {
+	fmt.Println(coins, target)
 	dp := make([]int, target+1)
+
+	for i := 1; i <= target; i++ {
+		dp[i] = math.MaxInt32 // Initialize each entry with a large value to represent "infinity".
+	}
+
 	dp[0] = 0
 
 	for i := 1; i <= target; i++ {
-		for coin := range coins {
+		for _, coin := range coins {
 			if i-coin >= 0 {
 				dp[i] = min(dp[i], dp[i-coin]+1)
+				// fmt.Println(dp[i])
 			}
 		}
 	}
 
+	// If dp[target] remains unchanged (still equal to MaxInt32), it means it's not possible to make up the target amount.
+	if dp[target] == math.MaxInt32 {
+		return -1
+	}
+
+	return dp[target]
 }
