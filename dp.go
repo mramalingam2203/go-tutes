@@ -40,9 +40,12 @@ import (
 */
 
 func main() {
+
+	/* Fibonacci and Fatorial functions call */
 	fmt.Println(fibonacci(10))
 	fmt.Println(factorial(10))
 
+	/* Coin change fnuction call */
 	coins := make([]int, 1)
 	coins[0] = 2
 	// coins[1] = 2
@@ -50,6 +53,11 @@ func main() {
 	target := 3
 
 	fmt.Println(coinChange(coins, target))
+
+	/*	Longest Common Subsequence(LCS) function call */
+	str1 := "abcabcdcd"
+	str2 := "abcdddadc"
+	lcs(str1, str2)
 
 }
 
@@ -94,14 +102,21 @@ func factorial(n int) int {
 	return fac[n]
 }
 
-// Coin Change Problem: Given a set of coin denominations and a target amount, find the minimum number of coins needed to make up that amount
-
 func min(a, b int) int {
 	if a < b {
 		return a
 	}
 
 	return b
+
+}
+
+func max(a, b int) int {
+	if a < b {
+		return b
+	}
+
+	return a
 
 }
 
@@ -146,11 +161,23 @@ func lcs(X, Y string) {
 		dp[i] = make([]int, n)
 	}
 	// Initialize the first row and first column of the dp array to 0.
-	for i := range m {
+	for i := 0; i < m; i++ {
 		dp[i][0] = 0
 	}
 
-	for j := range n {
-		dp[0][j] = 0
+	for i := 0; i < n; i++ {
+		dp[0][i] = 0
 	}
+
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if X[i-1] == Y[j-1] {
+				dp[i][j] = dp[i-1][j-1] + 1
+			} else {
+				dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+			}
+		}
+	}
+
+	fmt.Println(dp)
 }
