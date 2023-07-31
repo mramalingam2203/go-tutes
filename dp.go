@@ -60,9 +60,9 @@ func main() {
 	LCS(str1, str2)
 
 	/* Knapsack problem */
-	w := []int{10, 30, 20, 15}
-	v := []int{10, 20, 30, 40}
-	kc := 50
+	w := []int{2, 3, 4, 5}
+	v := []int{3, 4, 5, 6}
+	kc := 8
 	knapsack(w, v, kc)
 
 }
@@ -254,6 +254,8 @@ func knapsack(weights []int, values []int, knapcap int) int {
 
 		}
 	}
+
+	fmt.Println(dp[n][knapcap])
 
 	// The final result is stored in dp[n][knapsack_capacity]
 	return dp[n][knapcap]
