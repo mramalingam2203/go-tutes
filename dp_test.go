@@ -125,17 +125,19 @@ func TestMaxSumSubArray(t *testing.T) {
 		expected int
 	}{
 		{[]int{}, 0},
-		{[]int{}, 0},
-		{[]int{}, 0},
-		{[]int{}, 0},
-		{[]int{}, 0},
-		{[]int{}, 0},
+		{[]int{-5, -3, -8, -12, -9}, -3},
+		{[]int{2, 4, 7, 1, 3, 6}, 23},
+		{[]int{-2, 1, -3, 4, -1, 2, 1, -5, 4}, 6},
+		{[]int{0, 0, 0, 0, 0}, 0},
+		{[]int{5}, 5},
+		{[]int{-3, -2, 1, -5, 4, 0, -1, 2}, 4},
+		{[]int{1, -2, 3, 4, -1, 2, 1, -5, 4, 6, -8, 10}, 16},
 	}
 
 	for _, test := range tests {
-		result := knapsack(test.weights, test.values, test.knapsack_capacity)
+		result := maxSumSubarray(test.array)
 		if result != test.expected {
-			t.Errorf("coinChange(%v, %d) returned %d, expected %d", test.weights, test.values, result, test.expected)
+			t.Errorf("maxSumSubArray(%v, %d) returned %d, expected %d", test.array, result, test.expected)
 		}
 	}
 }
