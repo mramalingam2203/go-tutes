@@ -261,3 +261,19 @@ func knapsack(weights []int, values []int, knapcap int) int {
 	return dp[n][knapcap]
 
 }
+
+// 6, Maximum Sum Subarray: Given an array of integers, find the contiguous subarray with the largest sum using dynamic programming.
+
+func maxSumSubarray(arr []int) []int {
+	n := len(arr)
+	max_ending_here := arr[0]
+	max_so_far := arr[0]	
+
+	for i := 1 i <= n-1; i++{
+
+		max_ending_here = max(arr[i], max_ending_here + arr[i])
+		max_so_far = max(max_so_far, max_ending_here)
+	}
+	
+	return max_so_far
+}
