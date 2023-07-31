@@ -59,6 +59,12 @@ func main() {
 	str2 := "abcdddadc"
 	LCS(str1, str2)
 
+	/* Knapsack problem */
+	w := []int{10, 30, 20, 15}
+	v := []int{10, 20, 30, 40}
+	kc := 50
+	knapsack(w, v, kc)
+
 }
 
 // Fibonacci Series: Implement the Fibonacci series using dynamic programming to efficiently calculate the nth Fibonacci number
@@ -213,7 +219,9 @@ func reverseString(s string) string {
 	return string(runes) // Convert the reversed slice back to a string
 }
 
-// 5. Knapsack Problem: Given a set of items with weights and values, and a maximum weight capacity for a knapsack, determine the maximum value that can be obtained by including items in the knapsack.
+// 5. Knapsack Problem: Given a set of items with weights and values, and a maximum weight capacity for a knapsack,
+// determine the maximum value that can be obtained by including items in the knapsack.
+
 func knapsack(weights []int, values []int, knapcap int) int {
 
 	n := len(weights)
