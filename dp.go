@@ -212,3 +212,18 @@ func reverseString(s string) string {
 
 	return string(runes) // Convert the reversed slice back to a string
 }
+
+// 5. Knapsack Problem: Given a set of items with weights and values, and a maximum weight capacity for a knapsack, determine the maximum value that can be obtained by including items in the knapsack.
+func knapsack(weights []int, values []int, knapcap int) int {
+
+	n := len(weights)
+
+	//Create a 2D array to store the maximum values that can be achieved
+	// for different knapsack capacities and different items taken.
+	// create a 2d slice of strings
+	dp := make([][]int, n+1)
+
+	for i := 0; i <= n; i++ {
+		dp[i] = make([]int, knapcap+1)
+	}
+}
