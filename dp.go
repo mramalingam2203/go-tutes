@@ -229,4 +229,25 @@ func knapsack(weights []int, values []int, knapcap int) int {
 	for w := 0; w <= knapcap; w++ {
 		dp[0][w] = 0
 	}
+
+	// Calculate the maximum value that can be achieved for each subproblem
+	for i := 1; i <= n; i++ {
+		for w := 0; w <= knapcap; w++ {
+
+			// If the current item's weight exceeds the current knapsack capacity,
+			// we cannot take it. So the maximum value remains the same as the previous item.
+			if weights[i-1] > w {
+				dp[i][w] = dp[i-1][w]
+			} else {
+				// Otherwise, we have two choices: take the current item or leave it.
+				// We choose the maximum of these two options.
+				dp[i][w] = max(dp[i-1][w], values[i-1]+dp[i-1][w-weights[i-1]])
+			}
+
+		}
+	}
+
+	// The final result is stored in dp[n][knapsack_capacity]
+	return dp[n][knapcap]
+
 }
