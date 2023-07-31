@@ -66,7 +66,7 @@ func main() {
 	knapsack(w, v, kc)
 
 	/* Maximm sum subarray */
-	array := []int{-2, 1, -3, 4, -1, 2, 1, -5, 4}
+	array := []int{2, 4, 7, 1, 3, 6}
 	maxSumSubarray(array)
 }
 
