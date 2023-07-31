@@ -95,3 +95,26 @@ func TestLCS(t *testing.T) {
 		}
 	}
 }
+
+func TestKnapsack(t *testing.T) {
+	tests := []struct {
+		weights           []int
+		values            []int
+		knapsack_capacity int
+		expected          int
+	}{
+		{[]int{}, []int{}, 10, 0},
+		{[]int{2, 3, 4}, []int{5, 6, 7}, 0, 0},
+		{[]int{6}, []int{10}, 5, 0},
+		{[]int{2, 3, 4}, []int{5, 6, 7}, 10, 18},
+		{[]int{0, 2, 0, 3}, []int{0, 5, 0, 6}, 5, 11},
+		{[]int{4, 5, 2, 1, 7, 3, 6}, []int{10, 12, 6, 4, 15, 8, 11}, 20, 40},
+	}
+
+	for _, test := range tests {
+		result := knapsack(test.weights, test.values, test.knapsack_capacity)
+		if result != test.expected {
+			t.Errorf("coinChange(%v, %d) returned %d, expected %d", test.weights, test.values, result, test.expected)
+		}
+	}
+}
