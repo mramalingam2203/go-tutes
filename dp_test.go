@@ -118,3 +118,24 @@ func TestKnapsack(t *testing.T) {
 		}
 	}
 }
+
+func TestMaxSumSubArray(t *testing.T) {
+	tests := []struct {
+		array    []int
+		expected int
+	}{
+		{[]int{}, 0},
+		{[]int{}, 0},
+		{[]int{}, 0},
+		{[]int{}, 0},
+		{[]int{}, 0},
+		{[]int{}, 0},
+	}
+
+	for _, test := range tests {
+		result := knapsack(test.weights, test.values, test.knapsack_capacity)
+		if result != test.expected {
+			t.Errorf("coinChange(%v, %d) returned %d, expected %d", test.weights, test.values, result, test.expected)
+		}
+	}
+}
