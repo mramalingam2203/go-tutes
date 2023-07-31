@@ -220,10 +220,13 @@ func knapsack(weights []int, values []int, knapcap int) int {
 
 	//Create a 2D array to store the maximum values that can be achieved
 	// for different knapsack capacities and different items taken.
-	// create a 2d slice of strings
 	dp := make([][]int, n+1)
 
 	for i := 0; i <= n; i++ {
 		dp[i] = make([]int, knapcap+1)
+	}
+
+	for w := 0; w <= knapcap; w++ {
+		dp[0][w] = 0
 	}
 }
