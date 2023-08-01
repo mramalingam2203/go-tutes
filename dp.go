@@ -308,8 +308,8 @@ func rodCutting(lengths []int, prices []int, n int) int {
 		}
 	}
 
-	fmt.Println(revenue[n])
-	return revenue[n]
+	fmt.Println(revenue[n-1])
+	return revenue[n-1]
 
 }
 
