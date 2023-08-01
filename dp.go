@@ -70,8 +70,8 @@ func main() {
 	maxSumSubArray(array)
 
 	/*Rod cutting */
-	length := []int{1, 2, 3, 4, 5, 6, 7, 8}
-	price := []int{1, 5, 8, 9, 10, 17, 17, 20}
+	length := []int{1, 2, 3, 4, 5}
+	price := []int{2, 5, 9, 6, 10}
 	N := 5
 	rodCutting(length, price, N)
 }
