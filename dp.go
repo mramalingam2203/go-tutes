@@ -67,7 +67,7 @@ func main() {
 
 	/* Maximm sum subarray */
 	array := []int{2, 4, 7, 1, 3, 6}
-	maxSumSubarray(array)
+	maxSumSubArray(array)
 }
 
 // Fibonacci Series: Implement the Fibonacci series using dynamic programming to efficiently calculate the nth Fibonacci number
@@ -267,7 +267,7 @@ func knapsack(weights []int, values []int, knapcap int) int {
 
 // 6, Maximum Sum Subarray: Given an array of integers, find the contiguous subarray with the largest sum using dynamic programming.
 
-func maxSumSubarray(arr []int) int {
+func maxSumSubArray(arr []int) int {
 	n := len(arr)
 	max_ending_here := arr[0]
 	max_so_far := arr[0]
@@ -280,3 +280,22 @@ func maxSumSubarray(arr []int) int {
 	fmt.Println(max_so_far)
 	return max_so_far
 }
+
+// 7. Rod Cutting Problem: Given a rod of length n and a list of prices for different rod lengths, find the maximum revenue that can be obtained by cutting and selling the rod.
+
+func rodCutting(lengths []int, prices []int, rod_length int) int {
+	revenue := make([]int, 0, rod_length+1)
+
+	for i := 0; i < rod_length+1; i++ {
+		max_revenue := 0
+		for j := 0; j < len(lengths); j++ {	
+			if lengths[j] <= i{
+				max_revenue = max(max_revenue, prices[j] + revenue[i-lengths[j]])
+
+			}
+		revenue[i] =  max_revenue
+	}
+	return revenue[new(type)]
+}
+
+
