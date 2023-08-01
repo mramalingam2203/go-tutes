@@ -74,6 +74,11 @@ func main() {
 	price := []int{2, 5, 9, 6, 10}
 	N := 5
 	rodCutting(length, price, N)
+
+	/* Maximm product subarray */
+	array = []int{1, 2, 3, 4, 5}
+	maxProdSubArray(array)
+
 }
 
 // Fibonacci Series: Implement the Fibonacci series using dynamic programming to efficiently calculate the nth Fibonacci number
@@ -306,4 +311,19 @@ func rodCutting(lengths []int, prices []int, n int) int {
 	fmt.Println(revenue[n])
 	return revenue[n]
 
+}
+
+// 12. Maximum Product Subarray: Given an array of integers, find the contiguous subarray with the largest product using dynamic programming.
+func maxProdSubArray(arr []int) int {
+	n := len(arr)
+	max_ending_here := arr[0]
+	max_so_far := arr[0]
+
+	for i := 1; i <= n-1; i++ {
+
+		max_ending_here = max(arr[i], max_ending_here*arr[i])
+		max_so_far = max(max_so_far, max_ending_here)
+	}
+	fmt.Println(max_so_far)
+	return max_so_far
 }
