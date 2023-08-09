@@ -35,14 +35,14 @@ func main() {
 		activitySelection(array)
 	*/
 
-	w := []int{2, 3, 4, 5}
-	v := []int{3, 4, 5, 6}
-	kc := 8
-	knapsack(w, v, kc)
+	w := []int{2, 3, 5, 7, 1}
+	v := []int{10, 5, 15, 7, 6}
+	kc := 15
+	fmt.Println(knapsack(w, v, kc))
 
 }
 
-func knapsack(weights []int, values []int, knapcap int) int {
+func knapsack(weights []int, values []int, capacity int) float64 {
 
 	table := make([][]int, len(weights))
 
@@ -58,11 +58,20 @@ func knapsack(weights []int, values []int, knapcap int) int {
 
 	// Sort the 2D slice based on the second column (index 1)
 	sort.Slice(table, func(i, j int) bool {
-		return table[i][2] < table[j][2]
+		return table[i][2] > table[j][2]
 	})
-
 	fmt.Println(table)
+	totalValue := 0.0
 
-	return 0
+	for item := 0; item < len(table); item++ {
+		if capacity >= table[item][0] {
+			totalValue += float64(table[item][1])
+			capacity -= table[item][0]
+		} else {
+			totalValue += (float64(table[item][1]) / float64(table[item][1])) * float64(capacity)
+			break
+		}
+	}
 
+	return totalValue
 }
