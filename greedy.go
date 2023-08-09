@@ -30,10 +30,9 @@ import (
 )
 
 func main() {
-	/*
-		array := [][]int{{1, 2}, {3, 4}, {5, 6}, {7, 8}}
-		activitySelection(array)
-	*/
+
+	array := [][]int{{1, 2}, {3, 4}, {5, 6}, {7, 8}}
+	activitySelection(array)
 
 	w := []int{2, 3, 5, 7, 1}
 	v := []int{10, 5, 15, 7, 6}
@@ -74,4 +73,23 @@ func knapsack(weights []int, values []int, capacity int) float64 {
 	}
 
 	return totalValue
+}
+
+func activitySelection(start_time []int, finish_time []int) float64 {
+	timetable := make([][]int, len(start_time))
+
+	for i := range table {
+		timetable[i] = make([]int, 2)
+	}
+
+	for i := 0; i < len(weights); i++ {
+		table[i][0] = start_time[i]
+		table[i][1] = finish_time[i]
+	}
+
+	// Sort the 2D slice based on the second column (index 1)
+	sort.Slice(table, func(i, j int) bool {
+		return table[i][1] > table[j][1]
+	})
+
 }
