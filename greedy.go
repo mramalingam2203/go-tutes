@@ -24,6 +24,11 @@
 
 package main
 
+import (
+	"fmt"
+	"sort"
+)
+
 func main() {
 	/*
 		array := [][]int{{1, 2}, {3, 4}, {5, 6}, {7, 8}}
@@ -49,8 +54,14 @@ func knapsack(weights []int, values []int, knapcap int) int {
 		table[i][0] = weights[i]
 		table[i][1] = values[i]
 		table[i][2] = values[i] / weights[i]
-
 	}
+
+	// Sort the 2D slice based on the second column (index 1)
+	sort.Slice(table, func(i, j int) bool {
+		return table[i][2] < table[j][2]
+	})
+
+	fmt.Println(table)
 
 	return 0
 
