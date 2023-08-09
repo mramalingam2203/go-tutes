@@ -24,20 +24,34 @@
 
 package main
 
-import "fmt"
-
 func main() {
-	array := [][]int{{1, 2}, {3, 4}, {5, 6}, {7, 8}}
-	activitySelection(array)
+	/*
+		array := [][]int{{1, 2}, {3, 4}, {5, 6}, {7, 8}}
+		activitySelection(array)
+	*/
+
+	w := []int{2, 3, 4, 5}
+	v := []int{3, 4, 5, 6}
+	kc := 8
+	knapsack(w, v, kc)
+
 }
 
-// Activity Selection Problem: Given a set of activities with start and finish times, select the maximum number of non-overlapping activities.
-func activitySelection(activities [][]int) {
+func knapsack(weights []int, values []int, knapcap int) int {
 
-	fmt.Println(activities)
-}
+	table := make([][]int, len(weights))
 
-func sortByIndex(arr [][]int) {
-	sorted := make([][]int, 0, len(arr))
+	for i := range table {
+		table[i] = make([]int, 3)
+	}
+
+	for i := 0; i < len(weights); i++ {
+		table[i][0] = weights[i]
+		table[i][1] = values[i]
+		table[i][2] = values[i] / weights[i]
+
+	}
+
+	return 0
 
 }
