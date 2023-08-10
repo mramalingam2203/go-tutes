@@ -49,6 +49,10 @@ func main() {
 	minCoins := coinChangeGreedy(coinDenominations, targetAmount)
 	fmt.Printf("Minimum coins needed to make %d cents: %d\n", targetAmount, minCoins)
 
+	/* Inteval Scheduling Problem */
+	intervals := [][]int{{1, 3}, {2, 5}, {4, 6}, {7, 8}, {7, 9}}
+	greedyIntervalScheduling(intervals)
+
 }
 
 func knapsack(weights []int, values []int, capacity int) float64 {
@@ -126,4 +130,18 @@ func coinChangeGreedy(coins []int, target int) int {
 	}
 
 	return coinCount
+}
+
+func greedyIntervalScheduling(intervals [][]int) {
+
+	// Sort the 2D slice based on the end times
+	sort.Slice(intervals, func(i, j int) bool {
+		return intervals[i][1] < intervals[j][1]
+	})
+
+	for i := 1; i < len(intervals); i++ {
+		if intervals[i][0] < intervals[i-1][1] {
+			fmt.Println(intervals[i])
+		}
+	}
 }
