@@ -30,14 +30,24 @@ import (
 )
 
 func main() {
+	/* Activity Selection */
+	// //array := [][]int{{1, 2}, {3, 4}, {5, 6}, {7, 8}}
+	// start := []int{1, 3, 0, 5, 3, 5, 6, 8, 8, 2}
+	// finish := []int{4, 5, 6, 7, 8, 9, 10, 11, 12, 13}
+	// activitySelection(start, finish)
 
-	array := [][]int{{1, 2}, {3, 4}, {5, 6}, {7, 8}}
-	activitySelection(array)
+	/* Fractional Knapsack problem */
+	// w := []int{2, 3, 5, 7, 1}
+	// v := []int{10, 5, 15, 7, 6}
+	// kc := 15
+	// fmt.Println(knapsack(w, v, kc))
 
-	w := []int{2, 3, 5, 7, 1}
-	v := []int{10, 5, 15, 7, 6}
-	kc := 15
-	fmt.Println(knapsack(w, v, kc))
+	/* Coin change problem */
+	coinDenominations := []int{25, 10, 5, 1}
+	targetAmount := 63
+
+	minCoins := coinChangeGreedy(coinDenominations, targetAmount)
+	fmt.Printf("Minimum coins needed to make %d cents: %d\n", targetAmount, minCoins)
 
 }
 
@@ -75,21 +85,45 @@ func knapsack(weights []int, values []int, capacity int) float64 {
 	return totalValue
 }
 
-func activitySelection(start_time []int, finish_time []int) float64 {
+func activitySelection(start_time []int, finish_time []int) {
 	timetable := make([][]int, len(start_time))
 
-	for i := range table {
-		timetable[i] = make([]int, 2)
+	for i := range timetable {
+		timetable[i] = make([]int, 3)
 	}
 
-	for i := 0; i < len(weights); i++ {
-		table[i][0] = start_time[i]
-		table[i][1] = finish_time[i]
+	for i := 0; i < len(timetable); i++ {
+		timetable[i][0] = start_time[i]
+		timetable[i][1] = finish_time[i]
+		timetable[i][2] = i
 	}
 
 	// Sort the 2D slice based on the second column (index 1)
-	sort.Slice(table, func(i, j int) bool {
-		return table[i][1] > table[j][1]
+	sort.Slice(timetable, func(i, j int) bool {
+		return timetable[i][1] < timetable[j][1]
 	})
 
+	fmt.Println(timetable)
+
+	for i := 0; i < len(timetable)-1; i++ {
+		if timetable[i][1] < timetable[i+1][0] {
+			fmt.Println(timetable[i][2])
+		}
+	}
+
+}
+
+func coinChangeGreedy(coins []int, target int) int {
+	sort.Sort(sort.Reverse(sort.IntSlice(coins))) // Sort in descending order
+
+	coinCount := 0
+
+	for _, coin := range coins {
+		for target >= coin {
+			target -= coin
+			coinCount++
+		}
+	}
+
+	return coinCount
 }
