@@ -139,9 +139,14 @@ func greedyIntervalScheduling(intervals [][]int) {
 		return intervals[i][1] < intervals[j][1]
 	})
 
-	for i := 1; i < len(intervals); i++ {
-		if intervals[i][0] < intervals[i-1][1] {
-			fmt.Println(intervals[i])
+	selectedIntervals := [][]int{{}}
+	selectedIntervals[0] = intervals[0]
+
+	for i := 1; i <= len(intervals); i++ {
+		if selectedIntervals[len(selectedIntervals)-1][0] < intervals[i-1][0] {
+			selectedIntervals = append(selectedIntervals, intervals[i])
 		}
 	}
+
+	fmt.Println(selectedIntervals)
 }
