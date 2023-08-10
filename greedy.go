@@ -42,16 +42,21 @@ func main() {
 	// kc := 15
 	// fmt.Println(knapsack(w, v, kc))
 
-	/* Coin change problem */
+	/* Coin change problem
 	coinDenominations := []int{25, 10, 5, 1}
 	targetAmount := 63
 
 	minCoins := coinChangeGreedy(coinDenominations, targetAmount)
-	fmt.Printf("Minimum coins needed to make %d cents: %d\n", targetAmount, minCoins)
+	fmt.Printf("Minimum coins needed to make %d cents: %d\n", targetAmount, minCoins) */
 
 	/* Inteval Scheduling Problem */
 	intervals := [][]int{{1, 3}, {2, 5}, {4, 6}, {7, 8}, {7, 9}}
 	greedyIntervalScheduling(intervals)
+
+	/* Task Scheduling Problem */
+	times := [][]int{{5, 2}, {3, 3}, {7, 1}, {2, 4}}
+
+	greedyTaskScheduling(times)
 
 }
 
@@ -149,4 +154,26 @@ func greedyIntervalScheduling(intervals [][]int) {
 	}
 
 	fmt.Println(selectedIntervals)
+}
+
+func greedyTaskScheduling(intervals [][]int) {
+
+	// Sort the 2D slice based on the end times
+	sort.Slice(intervals, func(i, j int) bool {
+		return intervals[i][1] < intervals[j][1]
+	})
+
+	currentTime := 0
+	totalLateness := 0
+
+	for i := 0; i < len(intervals); i++ {
+
+		completionTime := currentTime + intervals[i][0]
+		lateness := completionTime - intervals[i][1]
+		totalLateness += lateness
+		currentTime = completionTime
+	}
+
+	fmt.Println(totalLateness)
+
 }
