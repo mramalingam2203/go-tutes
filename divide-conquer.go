@@ -59,7 +59,7 @@ import (
 
 func main() {
 	coords := [][]int{{2, 1}, {1, 0}, {1, 2}, {4, 5}, {3, 2}, {5, 4}}
-	convexHull(coords)
+	findConvexHull(coords)
 
 }
 
@@ -84,12 +84,12 @@ func findConvexHull(points [][]int) [][]int {
 	left_half := points[:n/2]
 	right_half := points[n/2:]
 
-	// Sort the 2D slice based on the end times
+	// Sort the 2D slice based on x-coord
 	sort.Slice(left_half, func(i, j int) bool {
 		return left_half[i][0] < left_half[j][0]
 	})
 
-	// Sort the 2D slice based on the end times
+	// Sort the 2D slice based on the x-coord
 	sort.Slice(right_half, func(i, j int) bool {
 		return right_half[i][0] < right_half[j][0]
 	})
@@ -97,8 +97,39 @@ func findConvexHull(points [][]int) [][]int {
 	fmt.Println(left_half)
 	fmt.Println(right_half)
 
-	left_hull = find_convex_hull(left_half)   // Recurse on left subset
-	right_hull = find_convex_hull(right_half) // Recurse on right subset
+	left_hull := findConvexHull(left_half)   // Recurse on left subset
+	right_hull := findConvexHull(right_half) // Recurse on right subset
+
+	fmt.Println("called")
+
+	_ = left_hull
+	_ = right_hull
 
 	return points
 }
+
+
+func merge_hulls(left_hull, right_hull):
+    lower_tangent = find_lower_tangent(left_hull, right_hull)
+    upper_tangent = find_upper_tangent(left_hull, right_hull)
+    
+    merged_hull = lower_tangent + upper_tangent
+    
+    return merged_hull
+
+}
+
+func find_lower_tangent(l_hull [][]int, r_hull [][]int) [][]int {
+		// Sort the 2D slice based on x-coord
+		sort.Slice(l_hull, func(i, j int) bool {
+			return l_hull[i][0] < l_hull[j][0]
+		})
+	
+		// Sort the 2D slice based on the x-coord
+		sort.Slice(r_hull, func(i, j int) bool {
+			return r_hull[i][0] < r_hull[j][0]
+		})
+
+}
+
+func find_upper_tangent()
