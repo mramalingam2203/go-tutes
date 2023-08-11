@@ -94,6 +94,11 @@ func karatsubaMultiplication(x int, y int) int {
 	c := y_str[:m]
 	d := y_str[n-m:]
 
+	ac = karatsuba_multiply(a, c) // Recurse on first halves
+	bd = karatsuba_multiply(b, d) // Recurse on second halves
+
+	ad_bc = karatsuba_multiply(a+b, c+d) - a*c - b*d // Recurse on the sum
+
 	/*
 	   a = first m digits of x
 	   b = last n - m digits of x
