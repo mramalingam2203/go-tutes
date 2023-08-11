@@ -69,7 +69,7 @@ func main() {
 
 	num1 := 1010120
 	num2 := 231301
-	karatsubaMultiplication(num1, num2)
+	fmt.Println(karatsubaMultiplication(num1, num2))
 
 }
 
@@ -97,8 +97,6 @@ func karatsubaMultiplication(x int, y int) int {
 	c_str := y_str[:m]
 	d_str := y_str[n-m:]
 
-	fmt.Println(a_str, b_str, c_str, d_str)
-
 	a, _ := strconv.Atoi(a_str)
 	b, _ := strconv.Atoi(b_str)
 	c, _ := strconv.Atoi(c_str)
@@ -114,17 +112,28 @@ func karatsubaMultiplication(x int, y int) int {
 
 }
 
+func FFT(x []int) []int {
+
+	n := len(x)
+	if n <= 1 {
+		return x
+	}
+
+	even := fft(x[0 : n/2])
+	odd := fft(x[n/2 : n])
+
+}
+
+func skyline()             {}
+func medianOfSortedArray() {}
+func LCS()                 {}
+
 func max(a, b int) int {
 	if a < b {
 		return b
 	}
 	return a
 }
-
-func FFT()                 {}
-func skyline()             {}
-func medianOfSortedArray() {}
-func LCS()                 {}
 
 /*
 func findConvexHull(points []Point) []Point {
