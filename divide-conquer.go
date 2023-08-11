@@ -52,7 +52,14 @@ Find the convex hull of a set of points in a 2D plane using algorithms like Grah
 
 package main
 
+import (
+	"fmt"
+	"sort"
+)
+
 func main() {
+	coords := [][]int{{2, 1}, {1, 0}, {1, 2}, {4, 5}, {3, 2}, {5, 4}}
+	convexHull(coords)
 
 }
 
@@ -66,4 +73,32 @@ func FFT()                     {}
 func skyline()                 {}
 func medianOfSortedArray()     {}
 func LCS()                     {}
-func convexHull()              {}
+
+func findConvexHull(points [][]int) [][]int {
+	n := len(points)
+
+	if n <= 3 {
+		return points
+	}
+
+	left_half := points[:n/2]
+	right_half := points[n/2:]
+
+	// Sort the 2D slice based on the end times
+	sort.Slice(left_half, func(i, j int) bool {
+		return left_half[i][0] < left_half[j][0]
+	})
+
+	// Sort the 2D slice based on the end times
+	sort.Slice(right_half, func(i, j int) bool {
+		return right_half[i][0] < right_half[j][0]
+	})
+
+	fmt.Println(left_half)
+	fmt.Println(right_half)
+
+	left_hull = find_convex_hull(left_half)   // Recurse on left subset
+	right_hull = find_convex_hull(right_half) // Recurse on right subset
+
+	return points
+}
