@@ -55,6 +55,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"math/cmplx"
 	"strconv"
 )
 
@@ -70,6 +71,12 @@ func main() {
 	num1 := 1010120
 	num2 := 231301
 	fmt.Println(karatsubaMultiplication(num1, num2))
+
+	input := []complex128{1, 2, 3, 4, 5, 6, 7, 8}
+	result := FFT(input)
+
+	fmt.Println("Input:", input)
+	fmt.Println("FFT Result:", result)
 
 }
 
@@ -112,15 +119,27 @@ func karatsubaMultiplication(x int, y int) int {
 
 }
 
-func FFT(x []int) []int {
+var Pi float64 = 4 * math.Atan(1)
+
+func FFT(x []complex128) []complex128 {
 
 	n := len(x)
 	if n <= 1 {
 		return x
 	}
 
-	even := fft(x[0 : n/2])
-	odd := fft(x[n/2 : n])
+	even := FFT(x[0 : n/2])
+	odd := FFT(x[n/2 : n])
+
+	result := make([]complex128, n)
+
+	for k := 0; k < n/2; k++ {
+		t := cmplx.Exp(-2*Pi*complex(0, 1)*complex(float64(k), 0)/complex(float64(n), 0)) * odd[k]
+		result[k] = even[k] + t
+		result[k+n/2] = even[k] - t
+	}
+
+	return result
 
 }
 
