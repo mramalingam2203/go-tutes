@@ -53,6 +53,8 @@ Find the convex hull of a set of points in a 2D plane using algorithms like Grah
 package main
 
 import (
+	"fmt"
+	"math"
 	"strconv"
 )
 
@@ -78,35 +80,37 @@ func closestPoints()      {}
 func maximumSubarraySum() {}
 
 func karatsubaMultiplication(x int, y int) int {
-	if x < 10 && y < 10 {
-		return x * y
-	}
 
 	x_str := strconv.Itoa(x)
 	y_str := strconv.Itoa(y)
 
+	if len(x_str) == 1 || len(y_str) == 1 {
+		return x * y
+	}
+
 	n := max(len(x_str), len(y_str))
 	m := n / 2
 
-	a := x_str[:m]
-	b := x_str[n-m:]
+	a_str := x_str[:m]
+	b_str := x_str[n-m:]
 
-	c := y_str[:m]
-	d := y_str[n-m:]
+	c_str := y_str[:m]
+	d_str := y_str[n-m:]
 
-	ac = karatsuba_multiply(a, c) // Recurse on first halves
-	bd = karatsuba_multiply(b, d) // Recurse on second halves
+	fmt.Println(a_str, b_str, c_str, d_str)
 
-	ad_bc = karatsuba_multiply(a+b, c+d) - a*c - b*d // Recurse on the sum
+	a, _ := strconv.Atoi(a_str)
+	b, _ := strconv.Atoi(b_str)
+	c, _ := strconv.Atoi(c_str)
+	d, _ := strconv.Atoi(d_str)
 
-	/*
-	   a = first m digits of x
-	   b = last n - m digits of x
-	   c = first m digits of y
-	   d = last n - m digits of y
-	*/
+	ac := karatsubaMultiplication(a, c) // Recurse on first halves
+	bd := karatsubaMultiplication(b, d) // Recurse on second halves
 
-	return 0
+	ad_bc := karatsubaMultiplication(a+b, c+d) - (ac + bd) // Recurse on the sum
+	_ = ad_bc
+
+	return ac*int(math.Pow(10, float64(n))) + (ad_bc * int(math.Pow(10, float64(n/2)))) + bd
 
 }
 
