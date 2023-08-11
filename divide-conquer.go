@@ -53,7 +53,6 @@ Find the convex hull of a set of points in a 2D plane using algorithms like Grah
 package main
 
 import (
-	"fmt"
 	"sort"
 )
 
@@ -74,6 +73,35 @@ func skyline()                 {}
 func medianOfSortedArray()     {}
 func LCS()                     {}
 
+type Point struct {
+	X, Y int
+}
+
+func findConvexHull(points []Point) []Point {
+	n := len(points)
+
+	if n <= 3 {
+		return points
+	}
+
+	sort.Slice(points, func(i, j int) bool {
+		if points[i].X == points[j].X {
+			return points[i].Y < points[j].Y
+		}
+		return points[i].X < points[j].X
+	})
+
+	leftHalf := points[:n/2]
+	rightHalf := points[n/2:]
+
+	leftHull := findConvexHull(leftHalf)
+	rightHull := findConvexHull(rightHalf)
+
+	return mergeHulls(leftHull, rightHull)
+
+}
+
+/*
 func findConvexHull(points [][]int) [][]int {
 	n := len(points)
 
@@ -108,28 +136,32 @@ func findConvexHull(points [][]int) [][]int {
 	return points
 }
 
+func merge_hulls(left_hull, right_hull) [][]int {
+	lower_tangent := find_lower_tangent(left_hull, right_hull)
+	upper_tangent := find_upper_tangent(left_hull, right_hull)
 
-func merge_hulls(left_hull, right_hull):
-    lower_tangent = find_lower_tangent(left_hull, right_hull)
-    upper_tangent = find_upper_tangent(left_hull, right_hull)
-    
-    merged_hull = lower_tangent + upper_tangent
-    
-    return merged_hull
+	merged_hull := lower_tangent + upper_tangent
+
+	return merged_hull
 
 }
 
+func isCounterClockwise(a, b, c Point) bool {
+	return (b.X-a.X)*(c.Y-a.Y)-(b.Y-a.Y)*(c.X-a.X) > 0
+}
+
 func find_lower_tangent(l_hull [][]int, r_hull [][]int) [][]int {
-		// Sort the 2D slice based on x-coord
-		sort.Slice(l_hull, func(i, j int) bool {
-			return l_hull[i][0] < l_hull[j][0]
-		})
-	
-		// Sort the 2D slice based on the x-coord
-		sort.Slice(r_hull, func(i, j int) bool {
-			return r_hull[i][0] < r_hull[j][0]
-		})
+	// Sort the 2D slice based on x-coord
+	sort.Slice(l_hull, func(i, j int) bool {
+		return l_hull[i][0] < l_hull[j][0]
+	})
+
+	// Sort the 2D slice based on the x-coord
+	sort.Slice(r_hull, func(i, j int) bool {
+		return r_hull[i][0] < r_hull[j][0]
+	})
 
 }
 
 func find_upper_tangent()
+*/
