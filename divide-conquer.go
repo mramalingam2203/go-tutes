@@ -70,13 +70,20 @@ func main() {
 func binarySearch() {}
 func mergeSort()    {}
 
-func closestPoints()           {}
-func maximumSubarraySum()      {}
-func karatsubaMultiplication() {}
-func FFT()                     {}
-func skyline()                 {}
-func medianOfSortedArray()     {}
-func LCS()                     {}
+func closestPoints()      {}
+func maximumSubarraySum() {}
+
+func karatsubaMultiplication(a int, b int) int {
+	if a < 10 && b < 10 {
+		return a * b
+	}
+
+}
+
+func FFT()                 {}
+func skyline()             {}
+func medianOfSortedArray() {}
+func LCS()                 {}
 
 func findConvexHull(points []Point) []Point {
 	n := len(points)
@@ -108,6 +115,30 @@ func mergeHulls(leftHull, rightHull []Point) []Point {
 
 	mergedHull := append(lowerTangent, upperTangent...)
 	return mergedHull
+}
+
+func findLowerTangent(leftHull, rightHull []Point) []Point {
+	leftIdx := findLeftMostPointIndex(rightHull)
+	rightIdx := findRightMostPointIndex(leftHull)
+
+	for {
+		newLeftIdx := (leftIdx + 1) % len(rightHull)
+		newRightIdx := (rightIdx + 1) % len(leftHull)
+
+		if !isCounterClockwise(rightHull[leftIdx], leftHull[rightIdx], rightHull[newLeftIdx]) {
+			leftIdx = newLeftIdx
+		} else if isCounterClockwise(leftHull[rightIdx], rightHull[leftIdx], leftHull[newRightIdx]) {
+			rightIdx = newRightIdx
+		} else {
+			break
+		}
+	}
+
+	return []Point{rightHull[leftIdx], leftHull[rightIdx]}
+}
+
+func isCounterClockwise(a, b, c Point) bool {
+	return (b.X-a.X)*(c.Y-a.Y)-(b.Y-a.Y)*(c.X-a.X) > 0
 }
 
 /*
