@@ -56,8 +56,13 @@ import (
 	"sort"
 )
 
+type Point struct {
+	X, Y int
+}
+
 func main() {
-	coords := [][]int{{2, 1}, {1, 0}, {1, 2}, {4, 5}, {3, 2}, {5, 4}}
+	// coords := [][]int{{2, 1}, {1, 0}, {1, 2}, {4, 5}, {3, 2}, {5, 4}}
+	coords := []Point{{2, 1}, {1, 0}, {1, 2}, {4, 5}, {3, 2}, {5, 4}}
 	findConvexHull(coords)
 
 }
@@ -72,10 +77,6 @@ func FFT()                     {}
 func skyline()                 {}
 func medianOfSortedArray()     {}
 func LCS()                     {}
-
-type Point struct {
-	X, Y int
-}
 
 func findConvexHull(points []Point) []Point {
 	n := len(points)
@@ -99,6 +100,14 @@ func findConvexHull(points []Point) []Point {
 
 	return mergeHulls(leftHull, rightHull)
 
+}
+
+func mergeHulls(leftHull, rightHull []Point) []Point {
+	lowerTangent := findLowerTangent(leftHull, rightHull)
+	upperTangent := findUpperTangent(leftHull, rightHull)
+
+	mergedHull := append(lowerTangent, upperTangent...)
+	return mergedHull
 }
 
 /*
