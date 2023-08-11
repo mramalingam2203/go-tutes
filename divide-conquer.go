@@ -53,7 +53,7 @@ Find the convex hull of a set of points in a 2D plane using algorithms like Grah
 package main
 
 import (
-	"sort"
+	"strconv"
 )
 
 type Point struct {
@@ -62,8 +62,12 @@ type Point struct {
 
 func main() {
 	// coords := [][]int{{2, 1}, {1, 0}, {1, 2}, {4, 5}, {3, 2}, {5, 4}}
-	coords := []Point{{2, 1}, {1, 0}, {1, 2}, {4, 5}, {3, 2}, {5, 4}}
-	findConvexHull(coords)
+	/* coords := []Point{{2, 1}, {1, 0}, {1, 2}, {4, 5}, {3, 2}, {5, 4}}
+	findConvexHull(coords) */
+
+	num1 := 1010120
+	num2 := 231301
+	karatsubaMultiplication(num1, num2)
 
 }
 
@@ -73,11 +77,39 @@ func mergeSort()    {}
 func closestPoints()      {}
 func maximumSubarraySum() {}
 
-func karatsubaMultiplication(a int, b int) int {
-	if a < 10 && b < 10 {
-		return a * b
+func karatsubaMultiplication(x int, y int) int {
+	if x < 10 && y < 10 {
+		return x * y
 	}
 
+	x_str := strconv.Itoa(x)
+	y_str := strconv.Itoa(y)
+
+	n := max(len(x_str), len(y_str))
+	m := n / 2
+
+	a := x_str[:m]
+	b := x_str[n-m:]
+
+	c := y_str[:m]
+	d := y_str[n-m:]
+
+	/*
+	   a = first m digits of x
+	   b = last n - m digits of x
+	   c = first m digits of y
+	   d = last n - m digits of y
+	*/
+
+	return 0
+
+}
+
+func max(a, b int) int {
+	if a < b {
+		return b
+	}
+	return a
 }
 
 func FFT()                 {}
@@ -85,6 +117,7 @@ func skyline()             {}
 func medianOfSortedArray() {}
 func LCS()                 {}
 
+/*
 func findConvexHull(points []Point) []Point {
 	n := len(points)
 
@@ -140,68 +173,4 @@ func findLowerTangent(leftHull, rightHull []Point) []Point {
 func isCounterClockwise(a, b, c Point) bool {
 	return (b.X-a.X)*(c.Y-a.Y)-(b.Y-a.Y)*(c.X-a.X) > 0
 }
-
-/*
-func findConvexHull(points [][]int) [][]int {
-	n := len(points)
-
-	if n <= 3 {
-		return points
-	}
-
-	left_half := points[:n/2]
-	right_half := points[n/2:]
-
-	// Sort the 2D slice based on x-coord
-	sort.Slice(left_half, func(i, j int) bool {
-		return left_half[i][0] < left_half[j][0]
-	})
-
-	// Sort the 2D slice based on the x-coord
-	sort.Slice(right_half, func(i, j int) bool {
-		return right_half[i][0] < right_half[j][0]
-	})
-
-	fmt.Println(left_half)
-	fmt.Println(right_half)
-
-	left_hull := findConvexHull(left_half)   // Recurse on left subset
-	right_hull := findConvexHull(right_half) // Recurse on right subset
-
-	fmt.Println("called")
-
-	_ = left_hull
-	_ = right_hull
-
-	return points
-}
-
-func merge_hulls(left_hull, right_hull) [][]int {
-	lower_tangent := find_lower_tangent(left_hull, right_hull)
-	upper_tangent := find_upper_tangent(left_hull, right_hull)
-
-	merged_hull := lower_tangent + upper_tangent
-
-	return merged_hull
-
-}
-
-func isCounterClockwise(a, b, c Point) bool {
-	return (b.X-a.X)*(c.Y-a.Y)-(b.Y-a.Y)*(c.X-a.X) > 0
-}
-
-func find_lower_tangent(l_hull [][]int, r_hull [][]int) [][]int {
-	// Sort the 2D slice based on x-coord
-	sort.Slice(l_hull, func(i, j int) bool {
-		return l_hull[i][0] < l_hull[j][0]
-	})
-
-	// Sort the 2D slice based on the x-coord
-	sort.Slice(r_hull, func(i, j int) bool {
-		return r_hull[i][0] < r_hull[j][0]
-	})
-
-}
-
-func find_upper_tangent()
 */
