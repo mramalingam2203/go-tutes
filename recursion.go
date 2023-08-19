@@ -14,6 +14,8 @@ func main() {
 
 	fmt.Println(recursivePower(2, 5))
 
+	fmt.Println(isPalindrome("abcddcba", 0, 7))
+
 }
 
 /*
@@ -79,4 +81,28 @@ func recursivePower(x, n int) int {
 	}
 
 	return x * recursivePower(x, n-1)
+}
+
+/*
+Palindrome Check:
+Create a recursive function to check if a given string is a palindrome (reads the same forwards and backwards).
+*/
+
+func isPalindrome(str string, leftIndex, rightIndex int) bool {
+
+	//	fmt.Println(leftIndex, rightIndex, string(str[leftIndex]), string(str[rightIndex]))
+
+	// Base case: If the indices cross each other, it's a palindrome
+	if leftIndex >= rightIndex {
+		return true
+	}
+
+	// Base case: If characters at the indices are different, it's not a palindrome
+	if str[leftIndex] != str[rightIndex] {
+		return false
+	}
+
+	// Recursive case: Check the next pair of characters
+	return isPalindrome(str, leftIndex+1, rightIndex-1)
+
 }
